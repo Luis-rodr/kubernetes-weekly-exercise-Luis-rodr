@@ -1,0 +1,11 @@
+# laravel-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: laravel-db-config
+  namespace: laravel
+data:
+  DB_HOST: "mysql"
+  DB_PORT: "3306"
+  DB_USERNAME: "bn_myapp"
+  DB_DATABASE: "bitnami_myapp"

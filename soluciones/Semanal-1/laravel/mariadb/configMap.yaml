@@ -1,0 +1,10 @@
+# laravel-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+  namespace: laravel
+data:
+  ALLOW_EMPTY_PASSWORD: "yes"
+  MARIADB_USER: "bn_myapp"
+  MARIADB_DATABASE: "bitnami_myapp"

@@ -4,7 +4,7 @@ metadata:
   name: phpmyadmin-db-config
   namespace: phpmyadmin
 data:
-  DATABASE_HOST: "mariadb"
+  DATABASE_HOST: "mysql"
   PMA_PORT: "3306"
   PMA_USER: "bn_myapp"
   PMA_PASSWORD: nil ## No password is safer than no password

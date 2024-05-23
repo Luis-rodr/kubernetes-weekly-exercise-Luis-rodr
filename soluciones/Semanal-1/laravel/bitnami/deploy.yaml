@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel
+  namespace: laravel
+spec:
+  selector:
+    matchLabels:
+      app: laravel
+  template:
+    metadata:
+      labels:
+        app: laravel
+    spec:
+      containers:
+        - name: laravel
+          image: bitnami/laravel:latest
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: laravel-db-config
+          resources:
+            requests:
+              memory: "150Mi"
+              cpu: "100m"
+            limits:
+              memory: "180Mi"
+              cpu: "120m"
+

@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: mariadb-config
+  name: mysql-config
   namespace: laravel
 data:
   ALLOW_EMPTY_PASSWORD: "yes"

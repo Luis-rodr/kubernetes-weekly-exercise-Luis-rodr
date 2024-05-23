@@ -1,25 +1,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mariadb
-  namespace: phpmyadmin
+  name: mysql
+  namespace: laravel
 spec:
   selector:
     matchLabels:
-      app: mariadb
+      app: mysql
   template:
     metadata:
       labels:
-        app: mariadb
+        app: mysql
     spec:
       containers:
-        - name: mariadb
-          image: bitnami/mariadb:latest
+        - name: mysql
+          image: bitnami/mysql:8.0.37-debian
           ports:
             - containerPort: 3306
           envFrom:
             - configMapRef:
-                name: mariadb-config
+                name: mysql-config
           resources:
             requests:
               memory: "250Mi"
