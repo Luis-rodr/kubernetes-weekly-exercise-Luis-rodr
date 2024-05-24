@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-php-configmap
+  namespace: {{ - .Values.namespace | default my-aplicacion | quote - }}
+data:
+  DATABASE_HOST: "mysql"
+  PMA_PORT: "3306"
+  PMA_USER: "bn_myapp"
+  MYSQL_ROOT_PASSWORD : nil

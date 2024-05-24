@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel
+  namespace: laravel
+spec:
+  selector:
+    matchLabels:
+      app: laravel
+  template:
+    metadata:
+      labels:
+        app: laravel
+    spec:
+      containers:
+        - name: laravel
+          image: bitnami/laravel:11.0.9
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: laravel-config
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "500m"
+              ## # nvidia.com/gpu: 1 # Solicitar 1 GPU
+            limits:
+              memory: "512Mi"
+              cpu: "1"
+              ## nvidia.com/gpu: 1 # Limitar a 1 GPU
+          volumeMounts:
+          - name: laravel-persistent-storage
+            mountPath: /app
+          readinessProbe:
+            httpGet:
+              path: localhost
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: localhost
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+      volumes:
+      - name: laravel-persistent-storage
+        persistentVolumeClaim:
+          claimName: laravel-pvc

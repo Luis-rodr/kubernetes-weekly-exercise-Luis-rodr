@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-config
+  namespace: laravel
+data:
+  MYSQL_ROOT_PASSWORD: "secure"
+  MYSQL_USER: "bn_myapp"
+  MYSQL_PASSWORD: "bn_mypassword"
+  MYSQL_DATABASE: "bitnami_myapp"

@@ -14,9 +14,21 @@ spec:
     spec:
       containers:
         - name: laravel
-          image: bitnami/laravel:latest
+          image: bitnami/laravel:11.0.9
           ports:
             - containerPort: 8000
+          readinessProbe:
+            tcpSocket:
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          livenessProbe:
+            exec:
+              command:
+              - cat
+              - /tmp/healthy
+            initialDelaySeconds: 12
+            periodSeconds: 20
           envFrom:
             - configMapRef:
                 name: laravel-db-config

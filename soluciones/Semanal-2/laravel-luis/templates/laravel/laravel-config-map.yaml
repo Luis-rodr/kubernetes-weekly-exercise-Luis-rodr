@@ -1,0 +1,15 @@
+# laravel-configmap.yaml
+#{{ if .Values.php }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: laravel-db-config
+  namespace: laravel
+data:
+  DB_HOST: mysql
+  DB_PORT: 3306 ##{{ .Values.db.port }}
+  DB_USERNAME: bn_myapp
+  DB_DATABASE: bitnami_myapp
+  ## DB_HOST: mysql #{{ default "none" .Values.php.host }}
+ # {{ end }}
+#{{ end }}

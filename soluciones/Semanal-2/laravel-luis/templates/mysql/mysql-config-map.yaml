@@ -1,0 +1,11 @@
+# laravel-configmap.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Release.Name }}-mysql-configmap
+  namespace: {{ .Values.namespace }}
+data:
+  MYSQL_ROOT_PASSWORD: {{-.Values.db.root-}}
+  MYSQL_USER: "bn_myapp"
+  MYSQL_PASSWORD: "bn_mypassword"
+  MYSQL_DATABASE: "bitnami_myapp"

@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpmyadmin
+  namespace: laravel
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin
+    spec:
+      containers:
+      - name: phpmyadmin
+        image: phpmyadmin:latest
+        ports:
+        - containerPort: 80
+        envFrom:
+        - configMapRef:
+            name: phpmyadmin-config
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "500m"
+            # # nvidia.com/gpu: 1 # Solicitar 1 GPU
+          limits:
+            memory: "512Mi"
+            cpu: "1"
+            # nvidia.com/gpu: 1 # Limitar a 1 GPU
+        volumeMounts:
+        - name: phpmyadmin-persistent-storage
+          mountPath: /etc/phpmyadmin
+      volumes:
+      - name: phpmyadmin-persistent-storage
+        persistentVolumeClaim:
+          claimName: phpmyadmin-pvc

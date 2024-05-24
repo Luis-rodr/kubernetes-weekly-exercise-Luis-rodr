@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpmyadmin
+  namespace: phpmyadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin
+---
+apiVersion: v1
+
+kind: Pod
+metadata:
+  name: phpmyadmin
+  namespace: phpmyadmin
+labels:
+  app: phpmyadmin
+spec:
+  containers:
+    - name: phpmyadmin
+      image: phpmyadmin:fpm-alpine
+      ports:
+        - containerPort: 8080
+      envFrom:
+        - configMapRef:
+            name: phpmyadmin-db-config
+      resources:
+        requests:
+          memory: "150Mi"
+          cpu: "100m"
+        limits:
+          memory: "180Mi"
+          cpu: "120m"
+
+
